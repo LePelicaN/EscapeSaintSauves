@@ -1,0 +1,59 @@
+ <!DOCTYPE html>
+
+ <html>
+	 <head>
+	 	<title>Escape from Saint-Sauves</title>
+	 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	 	<style>
+			html, body {
+			    width: 100%;
+			    height: 100%;
+			}
+		</style>
+		    <script src="jquery.js"></script> 
+    	<script> 
+    		$(function(){
+      			$("#includedContent").load("b.html"); 
+    		});
+    	</script> 
+	 </head>
+
+	 <body>
+
+	 	<h1>Trouvez le bon mot !</h1>
+	 	<p>Saisissez le (les ?!?) bon mot pour vous échapper.</p>
+
+	 	<div>
+	 		Réponse : <input type="text" id="response" value="Votre réponse">
+	 		<button onclick="verifyResponse()">Valider</button>
+	 	</div>
+
+	 	<div id="clue" style="height: 100%; width:100%">
+	 	</div>
+
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+		<script>
+			function verifyResponse() {
+				var validResponses = {
+					  "GABRIEL": "image.inc",
+					  "JO": "video.inc",
+					  "OLIVIER": "text.inc"
+					};
+
+			    var response = document.getElementById("response").value.toUpperCase();
+			    if (response in validResponses) {
+$.ajaxSetup ({
+    // Disable caching of AJAX responses
+    cache: false
+});
+      				$("#clue").load(validResponses[response]); 
+			    	//document.getElementById("clue").innerHTML =
+			    	//	"<object class=\"internal\" name=\"" + validResponses[response] + "\" type=\"text/html\" data=\"" + validResponses[response] + ".inc\"></object>";
+			    } else {
+      				$("#clue").load("not_correct.inc"); 
+			    }
+			}
+		</script>
+
+	 </body>
+ </html> 
